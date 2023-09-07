@@ -25,28 +25,28 @@
               <span class="section-heading-lower">Contacto</span>
             </h2>
 
-            <!-- Formulario de contacto -->
-            <form>
+            {% if 'ok' in request.GET %}
+            <p>Datos enviados correctamente</p>
+            {% elif 'fail' in request.GET %}
+            <p>Ha ocurrido un error, intente nuevamente</p>
+            {% endif %}
+
+            <form action="" method="POST">
+              {% csrf_token %}
               <div class="form-group">
                 <label>Nombre *</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" />
-                </div>
+                <div class="input-group">{{contactForm.name}}</div>
+                {{contactForm.name.errors}}
               </div>
               <div class="form-group">
                 <label>Email *</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" />
-                </div>
-                <ul class="errorlist">
-                  <li>El email no es correcto.</li>
-                </ul>
+                <div class="input-group">{{contactForm.email}}</div>
+                {{contactForm.email.errors}}
               </div>
               <div class="form-group">
                 <label>Mensaje *</label>
-                <div class="input-group">
-                  <textarea class="form-control"></textarea>
-                </div>
+                <div class="input-group">{{contactForm.message}}</div>
+                {{contactForm.message.errors}}
               </div>
               <div class="text-center">
                 <input
